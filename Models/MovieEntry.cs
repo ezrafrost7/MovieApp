@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MovieApp.Models
 {
     //this is the model and class for the movies that are entered into the website
+    //includes some restriction on fields tha are required or have other limitations
     public class MovieEntry
     {
         [Required]

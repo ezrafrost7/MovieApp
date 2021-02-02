@@ -44,7 +44,7 @@ namespace MovieApp.Controllers
             {
                 //adding the submitted form to the local storage for display on another page
                 TempStorage.AddEntry(movieEntry);
-
+                //once the fomr is successfully sumbitted, it redirects to the view of all submitted movies
                 Response.Redirect("ViewEntries");
             }
 

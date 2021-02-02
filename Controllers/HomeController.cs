@@ -18,11 +18,32 @@ namespace MovieApp.Controllers
             _logger = logger;
         }
 
+        //this is the action to display the home page/ Index view
         public IActionResult Index()
         {
             return View();
         }
 
+        //view in order to display the page with the podcast website link
+        public IActionResult Podcast()
+        {
+            return View();
+        }
+
+        //this action will display the page with a form
+        [HttpGet]
+        public IActionResult MovieEntry()
+        {
+            return View();
+        }
+        //once the form is submit, this action will occur
+        [HttpPost]
+        public IActionResult MovieEntry( MovieEntry movieEntry)
+        {
+            return View(movieEntry);
+        }
+
+        //these are built-in pages, optional views that might not be used
         public IActionResult Privacy()
         {
             return View();

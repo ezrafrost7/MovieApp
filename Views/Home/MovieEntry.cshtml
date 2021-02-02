@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewBag.Title = "Enter Movie into Database";
+    ViewBag.Title = "Enter a Movie into Database";
 }
 @model MovieApp.Models.MovieEntry
 <!--this is the form that you will use to add data about movies to your site-->
@@ -36,9 +36,9 @@
     <div>
         <label asp-for="Edited">Edited</label>
         <select asp-for="Edited">
-            <option value="">Select One</option>
-            <option value="true">Edited</option>
-            <option value="false">Not Edited</option>
+            <option value="false">Select One</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
         </select>
     </div>
     <div>

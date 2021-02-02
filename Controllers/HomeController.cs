@@ -40,7 +40,13 @@ namespace MovieApp.Controllers
         [HttpPost]
         public IActionResult MovieEntry( MovieEntry movieEntry)
         {
+            if (ModelState.IsValid)
+            {
+                Response.Redirect("Index");
+            }
+
             return View(movieEntry);
+            
         }
 
         //these are built-in pages, optional views that might not be used

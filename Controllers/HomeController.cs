@@ -42,11 +42,20 @@ namespace MovieApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                Response.Redirect("Index");
+                //adding the submitted form to the local storage for display on another page
+                TempStorage.AddEntry(movieEntry);
+
+                Response.Redirect("ViewEntries");
             }
 
             return View(movieEntry);
             
+        }
+
+        //movie entries view
+        public IActionResult ViewEntries()
+        {
+            return View(TempStorage.Entries);
         }
 
         //these are built-in pages, optional views that might not be used

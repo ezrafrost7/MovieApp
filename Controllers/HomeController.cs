@@ -40,7 +40,7 @@ namespace MovieApp.Controllers
         [HttpPost]
         public IActionResult MovieEntry( MovieEntry movieEntry)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && movieEntry.Title != "Independence Day")
             {
                 //adding the submitted form to the local storage for display on another page
                 TempStorage.AddEntry(movieEntry);

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MovieApp.Models;
+using MovieApp.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,9 +15,16 @@ namespace MovieApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //setting teh DB objects in the controller
+        private IMoviesRepository _repository;
+        private MoviesContext _context { get; set; }
+
+        public HomeController(ILogger<HomeController> logger, IMoviesRepository repository, MoviesContext context)
         {
+            //settting the private objects, settings, db stuff
             _logger = logger;
+            _repository = repository;
+            _context = context;
         }
 
         //this is the action to display the home page/ Index view
@@ -38,24 +47,30 @@ namespace MovieApp.Controllers
         }
         //once the form is submit, this action will occur
         [HttpPost]
-        public IActionResult MovieEntry( MovieEntry movieEntry)
+        public IActionResult MovieEntry(MovieEntry movieEntry)
         {
-            if (ModelState.IsValid && movieEntry.Title != "Independence Day")
+            if (ModelState.IsValid)
             {
-                //adding the submitted form to the local storage for display on another page
-                TempStorage.AddEntry(movieEntry);
-                //once the fomr is successfully sumbitted, it redirects to the view of all submitted movies
-                Response.Redirect("ViewEntries");
-            }
+                _context.Movies.Add(movieEntry);
+                _context.SaveChanges();
 
-            return View(movieEntry);
+                return View("ViewEntries", _context.Movies);
+
+                //this is for temp storage, before adding the DB
+                ////adding the submitted form to the local storage for display on another page
+                //TempStorage.AddEntry(movieEntry);
+                ////once the fomr is successfully sumbitted, it redirects to the view of all submitted movies
+                //Response.Redirect("ViewEntries");
+            } else {
+                return View(movieEntry);
+                    };
             
         }
 
         //movie entries view
         public IActionResult ViewEntries()
         {
-            return View(TempStorage.Entries);
+            return View(_context.Movies);
         }
 
         //these are built-in pages, optional views that might not be used

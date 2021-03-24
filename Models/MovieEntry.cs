@@ -10,6 +10,8 @@ namespace MovieApp.Models
     //includes some restriction on fields tha are required or have other limitations
     public class MovieEntry
     {
+        [Key]
+        public int MoviesId { get; set; }
         [Required]
         public string Category { get; set; }
         [Required]

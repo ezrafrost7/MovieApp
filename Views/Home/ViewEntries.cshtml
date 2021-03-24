@@ -10,9 +10,10 @@
 
     <!--this table below has a header and then iterates through all the items in the local storage to display the
         movies that have been submitted during this session-->
-    <table>
+    <table class="col-12 table table-striped table-bordered">
         <thead>
             <tr>
+                <th>Movie ID</th>
                 <th>Category</th>
                 <th>Title</th>
                 <th>Year</th>
@@ -21,21 +22,36 @@
                 <th>Edited</th>
                 <th>Lent To</th>
                 <th>Notes</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var x in Model)
             {
-                <tr>
-                    <td>@x.Category</td>
-                    <td>@x.Title</td>
-                    <td>@x.Year</td>
-                    <td>@x.Director</td>
-                    <td>@x.Rating</td>
-                    <td>@x.Edited</td>
-                    <td>@x.LentTo</td>
-                    <td>@x.Notes</td>
-                </tr>
+            <tr>
+                <td>@x.MoviesId</td>
+                <td>@x.Category</td>
+                <td>@x.Title</td>
+                <td>@x.Year</td>
+                <td>@x.Director</td>
+                <td>@x.Rating</td>
+                <td>@x.Edited</td>
+                <td>@x.LentTo</td>
+                <td>@x.Notes</td>
+                <td class="test-center">
+                    <form asp-action="EditView" method="post">
+                        <input type="hidden" name="MoviesId" value="@x.MoviesId" />
+                        <button type="submit" class="btn btn-info btn-sm">Edit Movie</button>
+                    </form>
+                </td>
+                <td class="test-center">
+                    <form asp-action="RemoveEntry" method="post">
+                        <input type="hidden" name="MoviesId" value="@x.MoviesId" />
+                        <button type="submit" class="btn btn-danger btn-sm">Remove Movie</button>
+                    </form>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

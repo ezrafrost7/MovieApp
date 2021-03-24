@@ -2,11 +2,11 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewBag.Title = "Enter a Movie into Database";
+    ViewBag.Title = "Edit your entry";
 }
 @model MovieApp.Models.MovieEntry
 <!--this is the form that you will use to add data about movies to your site-->
-<form asp-action="MovieEntry" method="post">
+<form asp-action="EditEntry" method="post">
     <div hidden="hidden">
         <input asp-for="MoviesId" />
     </div>
@@ -54,5 +54,5 @@
     </div>
     <br />
     <div asp-validation-summary="All"></div>
-    <button type="submit">Submit your movie</button>
+    <button type="submit">Save Changes</button>
 </form>

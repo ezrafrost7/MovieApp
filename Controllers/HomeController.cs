@@ -49,6 +49,12 @@ namespace MovieApp.Controllers
         [HttpPost]
         public IActionResult MovieEntry(MovieEntry movieEntry)
         {
+            if (movieEntry.Title == "Independence Day")
+            {
+                ModelState.AddModelError(movieEntry.Title, "Independence Day is not a good movie");
+                return View(movieEntry);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Movies.Add(movieEntry);
@@ -65,6 +71,36 @@ namespace MovieApp.Controllers
                 return View(movieEntry);
                     };
             
+        }
+
+        //removing an entry????
+        [HttpPost]
+        public IActionResult RemoveEntry(long moviesId)
+        {
+            _context.Movies.Remove(_context.Movies.First(m => m.MoviesId == moviesId));
+
+            _context.SaveChanges();
+
+            return View("ViewEntries", _context.Movies);
+        }
+
+        //edit a movie entry
+        [HttpPost]
+        public IActionResult EditView(long moviesId)
+        {
+            MovieEntry movie = _context.Movies.Where(m => m.MoviesId == moviesId).First();
+            movie.Edited = true;
+
+            return View("EditEntry", movie);
+        }
+        [HttpPost]
+        public IActionResult EditEntry(MovieEntry movie)
+        {
+            _context.Update(movie);
+
+            _context.SaveChanges();
+
+            return View("ViewEntries", _context.Movies);
         }
 
         //movie entries view

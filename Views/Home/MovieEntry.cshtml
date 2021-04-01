@@ -7,9 +7,6 @@
 @model MovieApp.Models.MovieEntry
 <!--this is the form that you will use to add data about movies to your site-->
 <form asp-action="MovieEntry" method="post">
-    <div hidden="hidden">
-        <input asp-for="MoviesId" />
-    </div>
     <div>
         <label asp-for="Category">Category</label>
         <input asp-for="Category" />
